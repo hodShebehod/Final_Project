@@ -12,8 +12,14 @@ def main():
         students_table = """ CREATE TABLE STUDENTS
                             (StudentID AUTOINCREMENT primary key,
                             FirstName varchar(20),
-                            LastName varchar(30)) if not exists ;""" 
-        cursor_obj.execure(students_table)
+                            LastName varchar(30)) if not exists ;"""
+        grades_table = """ CREATE TABLE GRADES 
+                            (StudentID foreign key,
+                            Midterm number,
+                            Final number,
+                            HomeworkAverage number) if not exists ;"""
+        cursor_obj.execute(students_table)
+        cursor_obj.execute(grades_table)
     except Exception as e:
         print(e.message)
 
