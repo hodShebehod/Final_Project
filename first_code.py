@@ -1,4 +1,4 @@
-main():
+def main():
     # import the module
     import sqlite3
     try:
