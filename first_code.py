@@ -1,6 +1,7 @@
 def main():
     # import the module
     import sqlite3
+    print(sqlite3.version)
     try:
         # make a  connection object
         connection_obj = sqlite3.connect('project.db')
@@ -9,20 +10,21 @@ def main():
         cursor_obj = connection_obj.cursor()
 
         # creating tables if it doesn't exit
-        students_table = """ CREATE TABLE STUDENTS
-                            (StudentID AUTOINCREMENT primary key,
+        students_table = """ CREATE TABLE if not exists STUDENTS
+                            (StudentID identity primary key,
                             FirstName varchar(20),
-                            LastName varchar(30)) if not exists ;"""
-        grades_table = """ CREATE TABLE GRADES 
-                            (StudentID foreign key,
+                            LastName varchar(30));"""
+        grades_table = """ CREATE TABLE  if not exists GRADES 
+                            (StudentID integer primary key,
                             Midterm number,
                             Final number,
-                            HomeworkAverage number) if not exists ;"""
+                            HomeworkAverage number,
+                            FOREIGN KEY (StudentID) REFERENCES students(studentid));"""
         cursor_obj.execute(students_table)
         cursor_obj.execute(grades_table)
     except Exception as e:
         print(e.message)
-'''this is the place to call the methods if the buttons are pressed'''
+    '''this is the place to call the methods if the buttons are pressed'''
     # close the object at the end
     connection_obj.close()
 
