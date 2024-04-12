@@ -24,7 +24,7 @@ def main():
         cursor_obj.execute(grades_table)
 
         # if the create button is pushed
-        # create(input("First name: "), input("Last name: "))
+        create(input("First name: "), input("Last name: "))
 
         # if the read button is pushed
         read()
