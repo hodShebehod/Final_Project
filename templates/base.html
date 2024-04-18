@@ -19,6 +19,31 @@
         <h1 class="ui center aligned header">
             Average App
         </h1>
-    </div> <!--do I need this?--> 
+
+        <form class="ui form" action="/add" method="post">
+            <div class="field">
+                <label>First name:</label>
+                <input type="text" name="fname" placeholder="First name">
+                <br>
+                <br>
+                <label>Last name:</label>
+                <input type="text" name="lname" placeholder="Last name">
+                <br>
+                <br>
+                <input type="submit" value="Submit">
+            </div>
+            <button class="ui blue button" type="submit">Add</button>
+        </form>
+
+        <hr>
+
+        {% for record in grade_list %}
+        <div class="ui segment">
+            <p class="ui big header">{{StudentID}} | {{FirstName}} {{LastName}} {{grade}}</p> <!--didn't yet add grade to table...-->
+            <a class="ui green button" href="/update/{{Student.StudentID}}">Update</a>
+            <a class="ui red button" href="/delete/{{Student.StudentID}}">Delete</a>
+        </div>
+        {% endfor %}
+    </div>
 </body>
 </html>
