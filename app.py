@@ -6,7 +6,6 @@ from sqlalchemy.sql import func
 app = Flask(__name__)
 
 @app.get("/")
-
 def home():
     return 'Hello, World!'
 
