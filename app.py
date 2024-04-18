@@ -25,6 +25,7 @@ class Student(project.Model):
     StudentID = project.Column(project.Integer, primary_key=True)
     FirstName = project.Column(project.String(20))
     LastName = project.Column(project.String(30))
+    Grade = project.Column(project.Integer)
 
     def __repr__(self):
         return f'<Student {self.StudentID}-{self.FirstName}-{self.LastName}'
@@ -59,4 +60,3 @@ def delete():
     project.session.delete(stu)
     project.session.commit()
     return redirect(url_for("home"))
-
