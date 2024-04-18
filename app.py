@@ -1,3 +1,4 @@
+import os
 # import things that I can use html
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
@@ -11,8 +12,11 @@ def home():
 
 @app.get("/bye")
 def bye():
-    return 'Bye, World!''''
+    return 'Bye, World!'    '''
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = \
         'sqlite:///' + os.path.join(basedir, 'project.sqlite')
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+project = SQLAlchemy(app)
