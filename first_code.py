@@ -1,6 +1,8 @@
 # import the module
 import sqlite3
 
+
+
 # make a  connection object
 connection_obj = sqlite3.connect('project.db')
 
