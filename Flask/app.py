@@ -30,7 +30,7 @@ class Student(project.Model):
     def __repr__(self):
         return f'<Student {self.StudentID}-{self.FirstName}-{self.LastName}'
 
-@app.get("/")
+@appeccc.get("/")
 def home():
     grade_list = project.session.query(STUDENTS).all()
     return render_template("base.html", grade_list=grade_list)
