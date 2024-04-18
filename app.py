@@ -20,3 +20,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = \
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 project = SQLAlchemy(app)
+
+class Student(project.Model)
+    StudentID = project.Column(project.identity, primary_key=True)
+    FirstName = project.Column(project.varchar(20))
+    LastName = project.Column(project.varchar(30))
+
+    def __repr__(self):
+        return f'<Student {self.StudentID}-{self.FirstName}-{self.LastName}'
