@@ -19,7 +19,7 @@ cursor_obj = connection_obj.cursor()
 def main():
     try:        
         # creating tables if it doesn't exit
-        cursor_obj.execute('drop table students')
+        # cursor_obj.execute('drop table students')
         students_table = '''CREATE TABLE if not exists STUDENTS
                             (StudentID integer primary key autoincrement,
                             FirstName varchar(20),
@@ -27,6 +27,7 @@ def main():
                             Grade integer);'''
 
         cursor_obj.execute(students_table)
+        temp = cursor_obj.execute('select avg(Grade) from students;')
 
     except Exception as e:
         print(e.message)
@@ -57,8 +58,6 @@ class Students(project.Model):
 def home():
     grade_list = []
     grade_list = project.session.query(Students).all()
-    for record in grade_list:
-        print(record)
     return render_template('base.html', grade_list=grade_list)
 
 @app.post("/add")
@@ -71,18 +70,16 @@ def add():
     project.session.commit()
     return redirect(url_for("home"))
 
-@app.get("/update/<int:student_id>")
-def update():
-    stu = project.session.query(STUDENTS).filter(Student.StudentID == student_id)
-    stu.FirstName = request.form.get("fname")
-    stu.LastName = request.form.get("lname")
-    stu.Grade = request.form.get("grd")
+@app.get("/delete/<int:student_id>")
+def delete(student_id):
+    stu = project.session.query(Students).filter_by(StudentID= student_id)
+    project.session.delete(stu)
     project.session.commit()
     return redirect(url_for("home"))
 
-@app.get("/delete/<int:student_id>")
-def delete():
-    stu = project.session.query(STUDENTS).filter(Student.StudentID == student_id)
-    project.session.delete(stu)
+
+@app.get("/get_average/")
+def average():
+    project.session.update()
     project.session.commit()
     return redirect(url_for("home"))
