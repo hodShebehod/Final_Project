@@ -1,8 +1,6 @@
 """# import the module
 import sqlite3
 
-
-
 # make a  connection object
 connection_obj = sqlite3.connect('project.db')
 
@@ -15,8 +13,9 @@ def main():
         students_table = ''' CREATE TABLE if not exists STUDENTS
                             (StudentID identity primary key,
                             FirstName varchar(20),
-                            LastName varchar(30));'''
-        grades_table = ''' CREATE TABLE  if not exists GRADES 
+                            LastName varchar(30),
+                            Grade integer);'''
+        '''grades_table = ''' CREATE TABLE  if not exists GRADES
                             (StudentID integer primary key,
                             Midterm number,
                             Final number,
@@ -25,11 +24,11 @@ def main():
         cursor_obj.execute(students_table)
         cursor_obj.execute(grades_table)
 
-        # if the create button is pushed
+        '''# if the create button is pushed
         create(input("First name: "), input("Last name: "))
 
         # if the read button is pushed
-        read()
+        read()'''
 
     except Exception as e:
         print(e.message)
@@ -37,7 +36,7 @@ def main():
     # close the object at the end
     connection_obj.close()
 
-def create(first_name, last_name):
+'''def create(first_name, last_name):
     '''execute code to create a new record in the student table and also grades table'''
     # create a new student into student table
     create_new_student = f''' INSERT INTO STUDENTS( FirstName, LastName ) VALUES({first_name}, {last_name});'''
@@ -49,14 +48,7 @@ def read():
     read_tables = '''SELECT *, homeworkaverage FROM students INNER JOIN grades;'''# on grades.f = students.f;'''
     cursor_obj.execute(read_tables).fetchall()
     results = cursor_obj.fetchall()
-    print(results)
-
-def update():
-    '''execute code to enable editing to students grade'''
-
-def update():
-    '''execute code to delete a record'''
+    print(results)'''
 
 if __name__ == "__main__":
-    main()
-"""
+    main()"""

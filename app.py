@@ -3,16 +3,39 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
+import first_code
 
 app = Flask(__name__)
 
-'''@app.get("/")
-def home():
-    return 'Hello, World!'
+# import the module
+import sqlite3
 
-@app.get("/bye")
-def bye():
-    return 'Bye, World!'    '''
+# make a  connection object
+connection_obj = sqlite3.connect('project.db')
+
+# make a cursor object
+cursor_obj = connection_obj.cursor()
+
+def main():
+    try:        
+        # creating tables if it doesn't exit
+        students_table = ''' CREATE TABLE if not exists STUDENTS
+                            (StudentID identity primary key,
+                            FirstName varchar(20),
+                            LastName varchar(30),
+                            Grade integer);'''
+
+        cursor_obj.execute(students_table)
+        cursor_obj.execute(grades_table)
+
+    except Exception as e:
+        print(e.message)
+
+    # close the object at the end
+    connection_obj.close()
+
+if __name__ == "__main__":
+    main()
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = \
@@ -32,8 +55,8 @@ class Student(project.Model):
 
 @app.get("/")
 def home():
-    grade_list = project.session.query(STUDENTS).all()
-    return render_template("base.html", grade_list=grade_list)
+    grade_list = project.session.query(Student).all()
+    return render_template('base.html', grade_list=grade_list)
 
 @app.post("/add")
 def add():
