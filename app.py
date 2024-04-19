@@ -19,8 +19,9 @@ cursor_obj = connection_obj.cursor()
 def main():
     try:        
         # creating tables if it doesn't exit
+        cursor_obj.execute('drop table students')
         students_table = '''CREATE TABLE if not exists STUDENTS
-                            (StudentID identity primary key,
+                            (StudentID integer primary key autoincrement,
                             FirstName varchar(20),
                             LastName varchar(30),
                             Grade integer);'''
@@ -54,7 +55,10 @@ class Students(project.Model):
 
 @app.get("/")
 def home():
+    grade_list = []
     grade_list = project.session.query(Students).all()
+    for record in grade_list:
+        print(record)
     return render_template('base.html', grade_list=grade_list)
 
 @app.post("/add")
