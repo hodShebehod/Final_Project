@@ -33,7 +33,8 @@ def main():
         print(e.message)
 
     # close the object at the end
-    connection_obj.close()    
+    connection_obj.close()
+
 
 if __name__ == "__main__":
     main()
@@ -80,6 +81,20 @@ def delete(student_id):
 
 @app.get("/get_average/")
 def average():
-    project.session.update()
-    project.session.commit()
-    return redirect(url_for("home"))
+    # make another  connection object
+    connection_obj2 = sqlite3.connect('project.sqlite')
+
+    # make another cursor object
+    cursor_obj2 = connection_obj2.cursor()
+    cursor_obj2.execute('''SELECT avg(Grade) FROM STUDENTS;''')
+    results = cursor_obj2.fetchall()
+    # close the object at the end
+    connection_obj2.close()
+
+    grade_list = []
+    grade_list = project.session.query(Students).all()
+    # project.session.update()
+    # project.session.commit()
+    print(results)
+    return render_template('base.html', results=results, grade_list=grade_list)
+

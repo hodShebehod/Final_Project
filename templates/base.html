@@ -23,6 +23,7 @@
         <p>
             <a class="ui yellow button" href="/get_average/">Calculate class average</a>
         </p>
+        <div>{{results}}</div>
 
         <form class="ui form" action="/add" method="post">
             <div class="field">
@@ -55,6 +56,7 @@
                     <p class="ui big header">{{record.StudentID}} | {{record.FirstName}} {{record.LastName}} {{record.Grade}}</p>
                     <!--<a class="ui green button" href="/update/{{record.StudentID}}">Update</a>-->
                     <a class="ui red button" href="/delete/{{record.StudentID}}">Delete</a>
+                    
                 </div>               
             <!--</form>-->
 
