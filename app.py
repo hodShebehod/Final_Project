@@ -73,7 +73,7 @@ def add():
 
 @app.get("/delete/<int:student_id>")
 def delete(student_id):
-    stu = project.session.query(Students).filter_by(StudentID= student_id)
+    stu = project.session.query(Students).filter(Students.StudentID == student_id).first()
     project.session.delete(stu)
     project.session.commit()
     return redirect(url_for("home"))
